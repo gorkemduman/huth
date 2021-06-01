@@ -16,18 +16,13 @@ It can either retrieve tokens using service account credentials or from Huawei's
   end
   ```
 
-2. Pass in your credentials json downloaded from your GCE account:
+2. Pass in your credentials json downloaded from your Huawei account:
 
   ```elixir
   config :huth,
     json: "path/to/huawei/json/creds.json" |> File.read!
   ```
-
-  Or, via an ENV var:
-  ```elixir
-  config :huth, json: {:system, "GCP_CREDENTIALS"}
-  ```
-
+  
   Or, via your own config module:
   ```elixir
   config :huth, config_module: MyConfigMod
@@ -69,23 +64,6 @@ def get_token do
     "https://www.huaweiapis.com/auth/cloud-platform.read-only"})
 end
 ```
-
-You can skip the last step if your application will run on a GCP or GKE instance with appropriate permissions.
-
-If you need to set the email account to impersonate. For example when using service accounts
-
-  ```elixir
-  config :huth,
-    json: {:system, "GCP_CREDENTIALS"},
-    actor_email: "some-email@your-domain.com"
-  ```
-
-Alternatively, you can pass your sub email on a per-call basis, for example:
-
-  ```elixir
-  Huth.Token.for_scope("https://www.huaweiapis.com/auth/pubsub",
-                       "some-email@your-domain.com")
-  ```
 
 If you need to disable Huth in certain environments, you can set a `disabled`
 flag in your config:

@@ -163,7 +163,7 @@ defmodule Huth.Config do
   @spec set(String.t() | atom, any()) :: :ok
   def set(key, value) when is_atom(key), do: key |> to_string |> set(value)
 
-  def set(key, value), do: set(:default, key, value)
+  def set(key, value), do: set(:hns_default, key, value)
 
   def set(account, key, value) do
     GenServer.call(__MODULE__, {:set, account, key, value})
@@ -174,7 +174,7 @@ defmodule Huth.Config do
   """
   @spec get(String.t() | atom()) :: {:ok, any()} | :error
   def get(key) when is_atom(key), do: key |> to_string() |> get()
-  def get(key), do: get(:default, key)
+  def get(key), do: get(:hns_default, key)
 
   @spec get(String.t() | atom(), String.t() | atom()) :: {:ok, any()} | :error
   def get(account, key) when is_atom(key) do

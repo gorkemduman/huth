@@ -27,14 +27,14 @@ defmodule Huth.TokenStore do
 
   @spec store({String.t() | atom(), String.t()} | String.t(), Token.t()) :: pid()
   def store(scopes, %Token{} = token) when is_binary(scopes),
-    do: store({:default, scopes}, token.sub, token)
+    do: store({:hns_default, scopes}, token.sub, token)
 
   def store({account, scopes}, %Token{} = token) when is_binary(scopes),
     do: store({account, scopes}, token.sub, token)
 
   @spec store(String.t(), String.t(), Token.t()) :: pid
   def store(scopes, sub, %Token{} = token) when is_binary(scopes),
-    do: store({:default, scopes}, sub, token)
+    do: store({:hns_default, scopes}, sub, token)
 
   @spec store({String.t() | atom(), String.t()}, String.t() | nil, Token.t()) :: pid
   def store({account, scopes}, sub, %Token{} = token) when is_binary(scopes) do
@@ -55,7 +55,7 @@ defmodule Huth.TokenStore do
           {:ok, Token.t()} | :error
   def find(info, sub \\ nil)
 
-  def find(scope, sub) when is_binary(scope), do: find({:default, scope}, sub)
+  def find(scope, sub) when is_binary(scope), do: find({:hns_default, scope}, sub)
 
   def find({account, scope}, sub) do
     GenServer.call(__MODULE__, {:find, {account, scope, sub}})

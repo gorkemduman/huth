@@ -26,10 +26,10 @@ defmodule Huth.Client do
   retrieve a new token.
   """
 
-  def get_access_token(scope), do: get_access_token({:default, scope}, [])
+  def get_access_token(scope), do: get_access_token({:hns_default, scope}, [])
 
   def get_access_token(scope, opts) when is_binary(scope) and is_list(opts) do
-    get_access_token({:default, scope}, opts)
+    get_access_token({:hns_default, scope}, opts)
   end
 
   def get_access_token({account, scope}, opts) when is_binary(scope) and is_list(opts) do
@@ -42,7 +42,7 @@ defmodule Huth.Client do
   # Fetch an access token from Huawei's metadata service for applications running
   # on Huawei's Cloud platform.
   def get_access_token(type, scope, opts) when is_atom(type) and is_binary(scope) do
-    get_access_token(type, {:default, scope}, opts)
+    get_access_token(type, {:hns_default, scope}, opts)
   end
 
   # Fetch an access token from Huawei's OAuth service using client credential

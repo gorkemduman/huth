@@ -18,7 +18,7 @@ defmodule Huth.Token do
                         type: "Bearer",
                         scope: "https://www.huaweiapis.com/auth/pubsub",
                         expires: 1453653825,
-                        account: :default}}
+                        account: :hns_default}}
 
   For using the token on subsequent requests to the Huawei API, just concatenate
   the `type` and `token` to create the authorization header. An example using
@@ -57,8 +57,8 @@ defmodule Huth.Token do
 
   @spec for_scope(scope :: String.t(), sub :: String.t() | nil) :: {:ok, t} | {:error, any()}
   def for_scope(scope, sub) when is_binary(scope) do
-    case TokenStore.find({:default, scope}, sub) do
-      :error -> retrieve_and_store!({:default, scope}, sub)
+    case TokenStore.find({:hns_default, scope}, sub) do
+      :error -> retrieve_and_store!({:hns_default, scope}, sub)
       {:ok, token} -> {:ok, token}
     end
   end
@@ -87,7 +87,7 @@ defmodule Huth.Token do
       scope: scope,
       sub: sub,
       expires: :os.system_time(:seconds) + attrs["expires_in"],
-      account: :default
+      account: :hns_default
     }
   end
 

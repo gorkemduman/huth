@@ -29,7 +29,7 @@ defmodule Huth.TokenTest do
              type: "Bearer",
              sub: "sub@example.com",
              expires: _exp,
-             account: :default
+             account: :hns_default
            } = Token.from_response_json("scope", "sub@example.com", json)
   end
 
@@ -63,9 +63,9 @@ defmodule Huth.TokenTest do
       )
     end)
 
-    assert {:ok, %Token{token: "123", account: :default}} = Token.for_scope("random")
+    assert {:ok, %Token{token: "123", account: :hns_default}} = Token.for_scope("random")
 
-    assert {:ok, %Token{token: "123", account: :default}} =
+    assert {:ok, %Token{token: "123", account: :hns_default}} =
              Token.for_scope("random", "sub@example.com")
   end
 

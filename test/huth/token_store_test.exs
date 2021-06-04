@@ -42,7 +42,7 @@ defmodule Huth.TokenStoreTest do
       type: "Bearer",
       sub: "sub@example.com",
       expires: :os.system_time(:seconds) + 1000,
-      account: :default
+      account: :hns_default
     }
 
     # if queued for later, we'll get back a reference
@@ -68,7 +68,7 @@ defmodule Huth.TokenStoreTest do
       token: "stale",
       type: "Bearer",
       expires: 1,
-      account: :default
+      account: :hns_default
     }
 
     task = TokenStore.store(token)
@@ -110,7 +110,7 @@ defmodule Huth.TokenStoreTest do
       type: "Bearer",
       sub: sub1,
       expires: :os.system_time(:seconds) + 1000,
-      account: :default
+      account: :hns_default
     })
 
     TokenStore.store(scopes, %Token{
@@ -118,7 +118,7 @@ defmodule Huth.TokenStoreTest do
       type: "Bearer",
       sub: sub2,
       expires: :os.system_time(:seconds) + 1000,
-      account: :default
+      account: :hns_default
     })
 
     assert :error == TokenStore.find(scopes)

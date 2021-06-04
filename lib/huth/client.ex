@@ -47,9 +47,9 @@ defmodule Huth.Client do
 
   # Fetch an access token from Huawei's OAuth service using client credential
   def get_access_token(:oauth_client_credential, {account, scope}, _opts) do
-    {:ok, grand_type} = Config.get(:grand_type)
-    {:ok, client_id} = Config.get(:client_id)
-    {:ok, client_secret} = Config.get(:client_secret)
+    {:ok, grand_type} = Config.get(account, :grand_type)
+    {:ok, client_id} = Config.get(account, :client_id)
+    {:ok, client_secret} = Config.get(account, :client_secret)
     endpoint = Application.get_env(:huth, :endpoint, "https://oauth-login.cloud.huawei.com")
     url = "#{endpoint}/oauth2/v2/token"
 
